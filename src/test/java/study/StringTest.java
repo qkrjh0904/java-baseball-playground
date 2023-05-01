@@ -43,4 +43,35 @@ public class StringTest {
             s.charAt(3);
         }).isInstanceOf(IndexOutOfBoundsException.class);
     }
+
+    @Test
+    void calculator() {
+//        Scanner scanner = new Scanner(System.in);
+//        String value = scanner.nextLine();
+        String value = "2 + 3 * 4 / 2";
+        assertThat(calculate(value)).isEqualTo(10);
+
+    }
+
+    private int calculate(String value) {
+        String[] values = value.split(" ");
+        int num = Integer.parseInt(values[0]);
+        for (int i = 1; i < values.length; i += 2) {
+            String operation = values[i];
+            int tmp = Integer.parseInt(values[i + 1]);
+            if (operation.equals("+")) {
+                num += tmp;
+            }
+            if (operation.equals("-")) {
+                num -= tmp;
+            }
+            if (operation.equals("*")) {
+                num *= tmp;
+            }
+            if (operation.equals("/")) {
+                num /= tmp;
+            }
+        }
+        return num;
+    }
 }
